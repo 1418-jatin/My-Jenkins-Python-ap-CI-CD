@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DOCKERHUB_CREDENTIALS = credentials('dockerhub-creds')
-        IMAGE_NAME = "19901418/My-Jenkins-Python-ap-CI-CD"
+        IMAGE_NAME = "19901418/my-jenkins-python-app-ci-cd"
         IMAGE_TAG = "${BUILD_NUMBER}"
     }
 
@@ -34,7 +34,7 @@ pipeline {
                     sed "s#IMAGE_TAG_PLACEHOLDER#${IMAGE_NAME}:${IMAGE_TAG}#g" k8s/deployment-template.yaml > k8s/deployment.yaml
                     kubectl apply -f k8s/deployment.yaml
                     kubectl apply -f k8s/service.yaml
-                    kubectl rollout status deployment/My-Jenkins-Python-ap-CI-CD
+                    kubectl rollout status deployment/my-jenkins-python-app-ci-cd
                 '''
             }
         }
