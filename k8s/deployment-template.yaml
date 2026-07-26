@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: python-web-app
+  name: my-jenkins-python-app-ci-cd
   labels:
     app: python-web-app
 spec:
