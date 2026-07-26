@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DOCKERHUB_CREDENTIALS = credentials('dockerhub-creds')
-        IMAGE_NAME = "1418-jatin/My-Jenkins-Python-ap-CI-CD"
+        IMAGE_NAME = "19901418/My-Jenkins-Python-ap-CI-CD"
         IMAGE_TAG = "${BUILD_NUMBER}"
     }
 
