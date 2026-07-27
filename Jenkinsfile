@@ -31,9 +31,17 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
                 sh '''
+                    # Generate kubeconfig for Jenkins agent
+                    aws eks update-kubeconfig --region ap-south-1 --name Prometheus-eks-cluster
+
+                    # Replace image placeholder with actual tag
                     sed "s#IMAGE_TAG_PLACEHOLDER#${IMAGE_NAME}:${IMAGE_TAG}#g" k8s/deployment-template.yaml > k8s/deployment.yaml
+
+                    # Apply manifests
                     kubectl apply -f k8s/deployment.yaml
                     kubectl apply -f k8s/service.yaml
+
+                    # Wait for rollout
                     kubectl rollout status deployment/my-jenkins-python-app-ci-cd
                 '''
             }
@@ -49,3 +57,4 @@ pipeline {
         }
     }
 }
+
